@@ -1,6 +1,7 @@
 package org.example.app.sportshoponline.service;
 
 import org.example.app.sportshoponline.model.Order;
+import org.example.app.sportshoponline.model.Product;
 
 import java.util.List;
 
@@ -12,7 +13,18 @@ public class OrderService {
     }
 
     public void placeOrder(Order order) {
+        List<Product> products = order.getProducts();
+        double totalPrice = calculateTotalPriceFromProducts(products);
+        order.setTotalPrice(totalPrice);
         dbService.save(order);
+    }
+
+    private double calculateTotalPriceFromProducts(List<Product> products) {
+        double totalPrice = 0.0;
+        for (Product product : products) {
+            totalPrice += product.getPrice();
+        }
+        return totalPrice;
     }
 
     public void cancelOrder(int orderId) {

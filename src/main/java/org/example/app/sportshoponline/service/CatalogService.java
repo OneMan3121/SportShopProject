@@ -15,6 +15,10 @@ public class CatalogService {
         dbService.save(product);
     }
 
+    public void addProduct(Product product) {
+        dbService.save(product);
+    }
+
     public void updateProduct(Product product) {
         dbService.update(product);
     }
